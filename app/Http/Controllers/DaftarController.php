@@ -39,6 +39,14 @@ class DaftarController extends Controller
 
         $daftar->fill($request->all());
         $daftar->status_ujian = "Belum di verifikasi";
+
+        if ($request->hasFile('upload')) {
+            $file = $request->file('upload');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $filename);
+            $daftar->upload = 'uploads/' . $filename;
+        }
+
         $daftar->save();
 
         $daftarId = $daftar->id;

@@ -18,7 +18,8 @@ class DaftarModel extends Model
         "semester",
         "ipk",
         "pilihan_beasiswa",
-        "status_ujian"
+        "status_ujian",
+        'upload'
     ];
 
     // protected $timestamps = false;

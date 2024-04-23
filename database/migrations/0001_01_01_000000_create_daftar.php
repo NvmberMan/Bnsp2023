@@ -17,6 +17,7 @@ return new class extends Migration
             $table->float('ipk');
             $table->string('pilihan_beasiswa');
             $table->string('status_ujian');
+            $table->string('upload');
             $table->timestamps();
         });
     }
