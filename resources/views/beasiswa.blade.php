@@ -4,48 +4,26 @@
 
 @section('content')
 
-    <h1 class="text-2xl font-bold text-center mt-[60px] text-gray-100">Pilihan Beasiswa</h1>
 
-    
+    <div class="container  text-gray-200 h-[80vh] flex flex-col justify-center items-center gap-2">
+        <h1 class="text-2xl font-bold text-center mb-3  text-gray-100 ">Pilihan Beasiswa</h1>
+        <div class="flex gap-2">
+            <div onclick="changeDir('/daftar?beasiswa=akademik')"
+                class="border-b-2 border-blue-200 cursor-pointer w-[300px] bg-blue-900 transition-colors hover:bg-blue-700 flex justify-center items-center h-[150px] text-lg font-bold">
+                Akademik
+            </div>
+            <div onclick="changeDir('/daftar?beasiswa=non+akademik')"
+                class="border-b-2 border-blue-200 cursor-pointer w-[300px] bg-blue-900 transition-colors hover:bg-blue-700 flex justify-center items-center h-[150px] text-lg font-bold">
+                Non Akademik
+            </div>
+        </div>
+
+    </div>
 
 
     <script>
-        const ipk = [];
-
-        function generateRandomIPK() {
-            return (Math.random() * (4.0 - 2.0) + 2.0).toFixed(2);
+        function changeDir(url){
+            window.location = url;
         }
-
-        for (let i = 0; i < 9; i++) {
-            ipk.push(generateRandomIPK());
-        }
-
-
-        // Fungsi untuk mengubah nilai input IPK terakhir
-        function changeLastIPK() {
-            const selectElement = document.getElementById('select_semester');
-            const selectedIndex = selectElement.value;
-
-            // Mengambil nilai IPK dari array berdasarkan indeks yang dipilih
-            const selectedIPK = selectedIndex != "" ? ipk[selectedIndex] : "IPK Terakhir";
-
-            // Mengubah nilai input IPK terakhir sesuai dengan yang dipilih
-            document.getElementById('disabled-input').value = selectedIPK;
-
-            // Mengecek apakah IPK terpilih di atas 3
-            if (selectedIPK > 3) {
-                // Jika ya, tampilkan elemen beasiswa
-                document.getElementById('select_beasiswa').style.display = 'block';
-            } else {
-                // Jika tidak, sembunyikan elemen beasiswa
-                document.getElementById('select_beasiswa').style.display = 'none';
-            }
-        }
-
-        // Menambahkan event listener untuk memanggil fungsi changeLastIPK() saat opsi dipilih
-        document.getElementById('select_semester').addEventListener('change', changeLastIPK);
-
-
-        console.log(ipk);
     </script>
 @stop

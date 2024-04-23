@@ -2,16 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BeasiswaModel;
+use App\Models\DaftarModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class DaftarController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('daftar');
+        if (!$request->has('beasiswa')) {
+            return Redirect()->route("beasiswa.index");
+        }
+
+        $beasiswadata = BeasiswaModel::get();
+        return view('daftar', compact('beasiswadata'));
     }
 
     /**
@@ -27,7 +35,15 @@ class DaftarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $daftar = new DaftarModel();
+
+        $daftar->fill($request->all());
+        $daftar->status_ujian = "Belum di verifikasi";
+        $daftar->save();
+
+        $daftarId = $daftar->id;
+        
+        return redirect()->route("hasil.index", ["id" => $daftarId]);
     }
 
     /**

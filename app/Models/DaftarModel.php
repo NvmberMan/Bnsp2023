@@ -12,7 +12,13 @@ class DaftarModel extends Model
     protected $table = "daftar";
 
     protected $fillable = [
-        "nama_beasiswa"
+        "nama",
+        "email",
+        "nomor_hp",
+        "semester",
+        "ipk",
+        "pilihan_beasiswa",
+        "status_ujian"
     ];
 
     // protected $timestamps = false;

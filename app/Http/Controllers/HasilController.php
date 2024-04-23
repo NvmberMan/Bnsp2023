@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DaftarModel;
 use Illuminate\Http\Request;
 
 class HasilController extends Controller
@@ -9,10 +10,19 @@ class HasilController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-        return view("hasil");
+        // $daftarId = $request->session()->get('daftarId');
+        $daftarId = $request->input('id');
+
+        if(!$daftarId)
+        {
+            return redirect()->route('beasiswa.index');
+        }
+
+        $hasil = DaftarModel::where("id", $daftarId)->first();
+
+        return view("hasil", compact('hasil'));
     }
 
     /**
