@@ -9,37 +9,34 @@ use Illuminate\Support\Facades\Redirect;
 
 class DaftarController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    //Menampilkan view dari halaman daftar
     public function index(Request $request)
     {
+        //melakukan pencekan apakah dia sudah memilih tipe beasiswa
         if (!$request->has('beasiswa')) {
-            return Redirect()->route("beasiswa.index");
+            return Redirect()->route("index");
         }
-
+        
+        //mengamil data dari table beasiswa
         $beasiswadata = BeasiswaModel::get();
         return view('daftar', compact('beasiswadata'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    //fungsi untuk memasukkan data kedalam table daftar
     public function store(Request $request)
     {
         $daftar = new DaftarModel();
 
+        //mengisi semua column dengan request yang ada
         $daftar->fill($request->all());
         $daftar->status_ujian = "Belum di verifikasi";
 
+        //mengecek apakah ada file upload
         if ($request->hasFile('upload')) {
             $file = $request->file('upload');
             $filename = time() . '_' . $file->getClientOriginalName();
@@ -51,36 +48,28 @@ class DaftarController extends Controller
 
         $daftarId = $daftar->id;
         
+        //mengarahkan ke function hasil.index dengan membawa id
         return redirect()->route("hasil.index", ["id" => $daftarId]);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, string $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(string $id)
     {
         //
